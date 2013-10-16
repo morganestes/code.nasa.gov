@@ -44,9 +44,8 @@ if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 	<?php 
 	//defining some stuff
 	$repositories = get_the_terms( $post->ID, 'Repository');
-	foreach( $repositories as $repository ) {
-	}
-	
+    if( $repositories ) :
+	foreach( $repositories as $repository ) :
 	 ?>
 	<article class="project single <?php /* if ( $repository->name == "GitHub" ) { print 'flag'; } */?>">
 		<?php /* if ( $repository->name == "GitHub" ) {
@@ -76,7 +75,9 @@ if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 			</aside>
 </article>
 
-<?php endwhile; ?>
+<?php endforeach;
+    endif;
+endwhile; ?>
 
 <?php if(function_exists('wp_paginate')) {
     wp_paginate();
